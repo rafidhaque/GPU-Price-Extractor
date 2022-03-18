@@ -8,4 +8,5 @@ result = requests.get(url)
 doc = BeautifulSoup(result.text, 'html.parser')
 
 prices = doc.find_all(text=lambda t: t and '৳' in t)
-print(prices[0].parent)
+parent = prices[0].parent
+print(parent.find_all('td'))
