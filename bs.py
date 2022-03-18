@@ -7,5 +7,5 @@ result = requests.get(url)
 
 doc = BeautifulSoup(result.text, 'html.parser')
 
-prices = doc.find_all('div', text=lambda t: t and '৳' in t)
-print(prices)
+prices = doc.find_all(text=lambda t: t and '৳' in t)
+print(prices[0].parent)
