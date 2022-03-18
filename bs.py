@@ -1,12 +1,9 @@
+from unittest import result
 from bs4 import BeautifulSoup
 import requests
 
-url = 'https://www.startech.com.bd/asus-phoenix-geforce-gtx-1650-oc-graphics-card'
+with open('index.html', 'r') as f:
+    doc = BeautifulSoup(f, 'html.parser')
 
-result = requests.get(url)
-
-doc = BeautifulSoup(result.text, 'html.parser')
-
-prices = doc.find_all(text=lambda t: t and '৳' in t)
-parent = prices[0].parent
-print(parent.find_all('td'))
+result = doc.find_all(class_='btn-item')
+print(result)
