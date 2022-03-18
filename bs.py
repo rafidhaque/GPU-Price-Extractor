@@ -1,8 +1,11 @@
 from bs4 import BeautifulSoup
+import requests
 
-with open('index.html', 'r') as f:
-    doc = BeautifulSoup(f, 'html.parser')
+url = 'https://www.startech.com.bd/asus-phoenix-geforce-gtx-1650-oc-graphics-card'
 
-tags = doc.find_all('p')[1]
+result = requests.get(url)
 
-print(tags.find_all('b'))
+doc = BeautifulSoup(result.text, 'html.parser')
+
+prices = doc.find_all('div', text=lambda t: t and '৳' in t)
+print(prices)
