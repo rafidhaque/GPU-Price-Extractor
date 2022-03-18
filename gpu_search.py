@@ -21,7 +21,15 @@ for page in range(1, pages+1):
     page = requests.get(url).text
     doc = BeautifulSoup(page, 'html.parser')
 
-    items = doc.find_all(class_= 'item-title', text=re.compile(gpu))
+    items = doc.find_all(class_= 'item-cell')
+    # print(items)
 
     for item in items:
-        print(item.text.strip())
+        thing = item.find(class_= 'item-title', text=re.compile(gpu))
+        thing = str(thing).split('>')
+        if len(thing) > 1:
+            name = (thing[1][:-3])
+            price = item.find(class_= 'price-current')
+            price = (price.find('strong'))
+            price = str(price).split('>')[1][:-8]
+            print(name +", " + price)
