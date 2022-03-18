@@ -3,6 +3,6 @@ from bs4 import BeautifulSoup
 with open('index.html', 'r') as f:
     doc = BeautifulSoup(f, 'html.parser')
 
-tags = doc.find_all('b')
+tags = doc.find_all('p')[1]
 
-print(tags)
+print(tags.find_all('b'))
